@@ -10,14 +10,14 @@ COPY package*.json ./
 # Install application dependencies
 RUN npm install
 
-# Install nodemon globally
+# Install nodemon globally for development (optional)
 RUN npm install -g nodemon
 
 # Copy the entire backend application to the working directory
 COPY . .
 
-# Expose the port your app will run on
+# Expose the ports your app will run on
 EXPOSE 3000
 
-# Use nodemon to run your application
+# Use nodemon to run your application (modify the command based on your setup)
 CMD ["nodemon", "app.js"]

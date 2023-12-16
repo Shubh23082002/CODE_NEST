@@ -13,10 +13,10 @@ RUN npm install
 # Copy the entire application to the working directory
 COPY . .
 
-# Build the Angular app
+# Build the Angular app (modify this based on your frontend framework)
 RUN npm run build
 
-# Expose the port the app runs on
+# Expose the ports the app runs on
 EXPOSE 4200
 
 # Define the command to run your application

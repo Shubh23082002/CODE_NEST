@@ -1,13 +1,22 @@
-version: '3'
+version: '3.8'
 services:
   frontend:
     image: frontend-image
     ports:
-      - "8080:80"
+      - "4200:4200"
+      # - "3000:3000"  # Expose the backend port
     depends_on:
-      - backend
+      - backend  # Wait for the backend service to be ready before starting
 
   backend:
     image: backend-image
     ports:
       - "3000:3000"
+
+  mongodb:
+    image: mongo:4.4  # Specify a specific MongoDB version
+    container_name: my-mongodb-container
+    ports:
+      - "27018:27017"
+    volumes:
+      - ./data:/data/db
