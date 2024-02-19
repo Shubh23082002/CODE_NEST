@@ -4,19 +4,32 @@ services:
     image: frontend-image
     ports:
       - "4200:4200"
-      # - "3000:3000"  # Expose the backend port
     depends_on:
-      - backend  # Wait for the backend service to be ready before starting
+      - backend
+    networks:
+      - my-network
+    environment:
+      - BACKEND_HOST=http://backend:3000
 
   backend:
     image: backend-image
     ports:
       - "3000:3000"
+    networks:
+      - my-network
+    environment:
+      - PORT=3000
+      - DB_CONNECTION=mongodb://my-mongodb-container:27017/MajorProject
 
   mongodb:
-    image: mongo:4.4  # Specify a specific MongoDB version
+    image: mongo:4.4
     container_name: my-mongodb-container
     ports:
       - "27018:27017"
     volumes:
       - ./data:/data/db
+    networks:
+      - my-network
+
+networks:
+  my-network:
